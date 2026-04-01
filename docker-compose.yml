@@ -14,8 +14,6 @@ services:
       # Use this to override the default docker configuration
       - ./Server:/home/steam/Server
     ports:
-      - "8766:8766/udp"
-      - "8767:8767/udp"
       - "16261:16261/udp"
       - "16262:16262/udp"
       - "27015:27015/tcp"
@@ -23,6 +21,4 @@ services:
     environment: 
       - SERVER_NAME=ZomboidDocker
       - ADMIN_PASSWORD=ZomboidDockerAdmin22
-      - STEAM_PORT_A=8766
-      - STEAM_PORT_B=8767
       - CONFIG_XMX=8
