@@ -11,25 +11,19 @@ ENV STEAMAPPID=380870
 ENV STEAMAPP=project-zomboid
 ENV STEAMAPPDIR="${HOMEDIR}/${STEAMAPP}-dedicated"
 
-ENV PUID=1001
-ENV PGID=1001
+ENV PUID=1000
+ENV PGID=1000
 
 # ARG DEBIAN_FRONTEND=noninteractive
+USER ${USER}
 
 COPY entrypoint.sh ${HOMEDIR}/entrypoint.sh
 RUN chmod +x "${HOMEDIR}/entrypoint.sh"
-
-RUN groupadd -g ${PGID} Zomboid
-RUN useradd -g ${PGID} -u ${PUID} Zomboid
-
-RUN chown -R ${PUID}:${PGID} "${HOMEDIR}"
-USER Zomboid
-
 COPY Server ${HOMEDIR}/Server
 WORKDIR ${HOMEDIR}
 VOLUME ${STEAMAPPDIR}
 
-CMD ["bash", "entrypoint.sh"]
+ENTRYPOINT [ "entrypoint.sh" ]
 
 EXPOSE 16261/udp
 EXPOSE 16262/udp
