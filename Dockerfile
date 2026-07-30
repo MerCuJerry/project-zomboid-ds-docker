@@ -25,8 +25,8 @@ RUN apt-get update && apt upgrade -y && \
 COPY entrypoint.sh ${HOMEDIR}/entrypoint.sh
 RUN chmod +x "${HOMEDIR}/entrypoint.sh"
 
-RUN addgroup -g ${PGID} Zomboid && \
-    adduser -D -u ${PUID} -G Zomboid Zomboid
+RUN addgroup -gid ${PGID} Zomboid && \
+    adduser -uid ${PUID} -ingroup Zomboid Zomboid
 
 RUN chown -R ${PUID}:${PGID} "${HOMEDIR}"
 USER Zomboid
