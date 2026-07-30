@@ -15,10 +15,11 @@ ENV PUID=1000
 ENV PGID=1000
 
 # ARG DEBIAN_FRONTEND=noninteractive
+
+RUN chmod +x "${HOMEDIR}/entrypoint.sh"
 USER ${USER}
 
 COPY entrypoint.sh ${HOMEDIR}/entrypoint.sh
-RUN chmod +x "${HOMEDIR}/entrypoint.sh"
 COPY Server ${HOMEDIR}/Server
 WORKDIR ${HOMEDIR}
 VOLUME ${STEAMAPPDIR}
