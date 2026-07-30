@@ -23,7 +23,7 @@ fi
 
 # Steamcmd install
 echo "APP <ID:${STEAMAPPID}> Install directory will be ${STEAMAPPDIR}"
-if [ ${STEAM_TEST_BRANCH} != "" ]; then
+if [ "${STEAM_TEST_BRANCH}" != "" ]; then
     echo "Using steamcmd beta branch ${STEAM_TEST_BRANCH}"
     ${STEAMCMDDIR}/steamcmd.sh +force_install_dir ${STEAMAPPDIR} +login anonymous +app_update ${STEAMAPPID} -beta ${STEAM_TEST_BRANCH} validate +quit
 else
