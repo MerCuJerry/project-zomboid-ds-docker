@@ -11,6 +11,9 @@ ENV STEAMAPPID 380870
 ENV STEAMAPP project-zomboid
 ENV STEAMAPPDIR "${HOMEDIR}/${STEAMAPP}-dedicated"
 
+ENV PUID=1000
+ENV PGID=1000
+
 # ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt upgrade -y && \
@@ -21,9 +24,8 @@ RUN apt-get update && apt upgrade -y && \
 
 COPY entrypoint.sh ${HOMEDIR}/entrypoint.sh
 COPY Server ${HOMEDIR}/Server
-RUN chmod +x "${HOMEDIR}/entrypoint.sh" && chown -R "${USER}:${USER}" "${HOMEDIR}"
+RUN chmod +x "${HOMEDIR}/entrypoint.sh"
 
-USER ${USER}
 WORKDIR ${HOMEDIR}
 VOLUME ${STEAMAPPDIR}
 
