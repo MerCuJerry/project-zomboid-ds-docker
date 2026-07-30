@@ -23,7 +23,7 @@ COPY Server ${HOMEDIR}/Server
 WORKDIR ${HOMEDIR}
 VOLUME ${STEAMAPPDIR}
 
-CMD [ "entrypoint.sh" ]
+CMD [ "bash", "entrypoint.sh" ]
 
 EXPOSE 16261/udp
 EXPOSE 16262/udp
