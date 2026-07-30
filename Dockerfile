@@ -16,12 +16,6 @@ ENV PGID 1001
 
 # ARG DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update && apt upgrade -y && \
-    mkdir -p /usr/share/man/man1 && \
-    apt-get install -y \
-        libsdl2-2.0-0 \
-        default-jre 
-
 COPY entrypoint.sh ${HOMEDIR}/entrypoint.sh
 RUN chmod +x "${HOMEDIR}/entrypoint.sh"
 
