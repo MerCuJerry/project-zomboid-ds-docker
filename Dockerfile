@@ -19,7 +19,7 @@ ENV PGID=1001
 COPY entrypoint.sh ${HOMEDIR}/entrypoint.sh
 RUN chmod +x "${HOMEDIR}/entrypoint.sh"
 
-RUN useradd -g ${PGID} Zomboid
+RUN groupadd -g ${PGID} Zomboid
 RUN useradd -g ${PGID} -u ${PUID} Zomboid
 
 RUN chown -R ${PUID}:${PGID} "${HOMEDIR}"
