@@ -18,7 +18,6 @@ ENV PGID=1000
 COPY entrypoint.sh ${HOMEDIR}/entrypoint.sh
 RUN chmod +x "${HOMEDIR}/entrypoint.sh"
 
-USER ${USER}
 COPY Server ${HOMEDIR}/Server
 WORKDIR ${HOMEDIR}
 VOLUME ${STEAMAPPDIR}

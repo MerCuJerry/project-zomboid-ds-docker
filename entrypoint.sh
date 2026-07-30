@@ -3,8 +3,6 @@
 export LD_LIBRARY_PATH=${STEAMAPPDIR}/jre64:$LD_LIBRARY_PATH
 CONFIG_PATH=${STEAMAPPDIR}/ProjectZomboid64.json
 
-su
-
 if [ ! -z "$PUID" ] && [ "$PUID" != "$(id -u steam)" ]; then
     usermod -o -u "$PUID" steam
 fi
