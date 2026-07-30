@@ -26,6 +26,7 @@ COPY entrypoint.sh ${HOMEDIR}/entrypoint.sh
 COPY Server ${HOMEDIR}/Server
 RUN chmod +x "${HOMEDIR}/entrypoint.sh"
 
+USER ${USER}
 WORKDIR ${HOMEDIR}
 VOLUME ${STEAMAPPDIR}
 
