@@ -3,19 +3,6 @@
 export LD_LIBRARY_PATH=${STEAMAPPDIR}/jre64:$LD_LIBRARY_PATH
 CONFIG_PATH=${STEAMAPPDIR}/ProjectZomboid64.json
 
-su
-
-if [ ! -z "$PUID" ] && [ "$PUID" != "$(id -u steam)" ]; then
-    usermod -o -u "$PUID" steam
-fi
-if [ ! -z "$PGID" ] && [ "$PGID" != "$(id -g steam)" ]; then
-    groupmod -o -g "$PGID" steam
-fi
-
-chown -R steam:steam /home/steam/
-
-su steam
-
 if ! test -d /home/steam/Zomboid/Server; then
     mkdir -p /home/steam/Zomboid/Server
     echo "COPY configuration from <${HOMEDIR}/Server/ZomboidDocker*> to </home/steam/Zomboid/Server/${SERVER_NAME}*>"

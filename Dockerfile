@@ -23,10 +23,15 @@ RUN apt-get update && apt upgrade -y && \
         default-jre 
 
 COPY entrypoint.sh ${HOMEDIR}/entrypoint.sh
-COPY Server ${HOMEDIR}/Server
 RUN chmod +x "${HOMEDIR}/entrypoint.sh"
 
-USER ${USER}
+RUN addgroup -g ${PGID} Zomboid && \
+    adduser -D -u ${PUID} -G Zomboid Zomboid
+
+RUN chown -R ${PUID}:${PGID} "${HOMEDIR}"
+USER Zomboid
+
+COPY Server ${HOMEDIR}/Server
 WORKDIR ${HOMEDIR}
 VOLUME ${STEAMAPPDIR}
 
