@@ -1,6 +1,7 @@
 #!/bin/sh
 # VARIABLES
 export LD_LIBRARY_PATH=${STEAMAPPDIR}/jre64:$LD_LIBRARY_PATH
+export HOME=${HOMEDIR}
 CONFIG_PATH=${STEAMAPPDIR}/ProjectZomboid64.json
 
 if [ ! -z "$PUID" ] && [ "$PUID" != "$(id -u steam)" ]; then
@@ -10,24 +11,24 @@ if [ ! -z "$PGID" ] && [ "$PGID" != "$(id -g steam)" ]; then
     groupmod -o -g "$PGID" steam
 fi
 
-chown -R steam:steam /home/steam/
+chown -R steam:steam ${HOMEDIR}
 
 su - steam
 
-if ! test -d /home/steam/Zomboid/Server; then
-    mkdir -p /home/steam/Zomboid/Server
-    echo "COPY configuration from <${HOMEDIR}/Server/ZomboidDocker*> to </home/steam/Zomboid/Server/${SERVER_NAME}*>"
-    if ! test -f /home/steam/Zomboid/Server/${SERVER_NAME}.ini; then
-    cp ${HOMEDIR}/Server/ZomboidDocker.ini /home/steam/Zomboid/Server/${SERVER_NAME}.ini
+if ! test -d ${HOMEDIR}/Zomboid/Server; then
+    mkdir -p ${HOMEDIR}/Zomboid/Server
+    echo "COPY configuration from <${HOMEDIR}/Server/ZomboidDocker*> to <${HOMEDIR}/Zomboid/Server/${SERVER_NAME}*>"
+    if ! test -f ${HOMEDIR}/Zomboid/Server/${SERVER_NAME}.ini; then
+    cp ${HOMEDIR}/Server/ZomboidDocker.ini ${HOMEDIR}/Zomboid/Server/${SERVER_NAME}.ini
     fi
-    if ! test -f /home/steam/Zomboid/Server/${SERVER_NAME}_SandboxVars.lua; then
-    cp ${HOMEDIR}/Server/ZomboidDocker_SandboxVars.lua /home/steam/Zomboid/Server/${SERVER_NAME}_SandboxVars.lua
+    if ! test -f ${HOMEDIR}/Zomboid/Server/${SERVER_NAME}_SandboxVars.lua; then
+    cp ${HOMEDIR}/Server/ZomboidDocker_SandboxVars.lua ${HOMEDIR}/Zomboid/Server/${SERVER_NAME}_SandboxVars.lua
     fi
-    if ! test -f /home/steam/Zomboid/Server/${SERVER_NAME}_spawnpoints.lua; then
-    cp ${HOMEDIR}/Server/ZomboidDocker_spawnpoints.lua /home/steam/Zomboid/Server/${SERVER_NAME}_spawnpoints.lua
+    if ! test -f ${HOMEDIR}/Zomboid/Server/${SERVER_NAME}_spawnpoints.lua; then
+    cp ${HOMEDIR}/Server/ZomboidDocker_spawnpoints.lua ${HOMEDIR}/Zomboid/Server/${SERVER_NAME}_spawnpoints.lua
     fi
-    if ! test -f /home/steam/Zomboid/Server/${SERVER_NAME}_spawnregions.lua; then
-    cp ${HOMEDIR}/Server/ZomboidDocker_spawnregions.lua /home/steam/Zomboid/Server/${SERVER_NAME}_spawnregions.lua
+    if ! test -f ${HOMEDIR}/Zomboid/Server/${SERVER_NAME}_spawnregions.lua; then
+    cp ${HOMEDIR}/Server/ZomboidDocker_spawnregions.lua ${HOMEDIR}/Zomboid/Server/${SERVER_NAME}_spawnregions.lua
     fi
 fi
 
