@@ -1,7 +1,6 @@
 #!/bin/sh
 # VARIABLES
 export LD_LIBRARY_PATH=${STEAMAPPDIR}/jre64:$LD_LIBRARY_PATH
-export HOME=${HOMEDIR}
 CONFIG_PATH=${STEAMAPPDIR}/ProjectZomboid64.json
 
 if [ ! -z "$PUID" ] && [ "$PUID" != "$(id -u steam)" ]; then
@@ -14,6 +13,7 @@ fi
 chown -R steam:steam ${HOMEDIR}
 
 su - steam
+export HOME=${HOMEDIR}
 
 if ! test -d ${HOMEDIR}/Zomboid/Server; then
     mkdir -p ${HOMEDIR}/Zomboid/Server
