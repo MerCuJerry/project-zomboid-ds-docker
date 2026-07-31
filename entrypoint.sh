@@ -38,10 +38,10 @@ if [ "${SKIP_INSTALL}" == "false" ]; then
     echo "APP <ID:${STEAMAPPID}> Install directory will be ${STEAMAPPDIR}"
     if [ "${STEAM_TEST_BRANCH}" != "" ]; then
         echo "Using steamcmd beta branch ${STEAM_TEST_BRANCH}"
-        ${STEAMCMDDIR}/steamcmd.sh +force_install_dir ${STEAMAPPDIR} +login anonymous +app_update ${STEAMAPPID} -beta ${STEAM_TEST_BRANCH} validate +quit
+        su - steam -c "${STEAMCMDDIR}/steamcmd.sh +force_install_dir ${STEAMAPPDIR} +login anonymous +app_update ${STEAMAPPID} -beta ${STEAM_TEST_BRANCH} validate +quit"
     else
         echo "Using steamcmd default branch"
-        ${STEAMCMDDIR}/steamcmd.sh +force_install_dir ${STEAMAPPDIR} +login anonymous +app_update ${STEAMAPPID} validate +quit
+        su - steam -c "${STEAMCMDDIR}/steamcmd.sh +force_install_dir ${STEAMAPPDIR} +login anonymous +app_update ${STEAMAPPID} validate +quit"
     fi
 fi
 
@@ -49,4 +49,5 @@ fi
 sed -i "s=Xmx8g=Xmx${CONFIG_XMX}g=g" ${CONFIG_PATH}
 sed -i "s=UseZGC=UseG1GC=g" ${CONFIG_PATH}
 
-${STEAMAPPDIR}/start-server.sh -servername ${SERVER_NAME} -adminpassword ${ADMIN_PASSWORD} ${ADDITIONAL_ARGS}
+export HOME=${HOMEDIR}
+su - steam -c "${STEAMAPPDIR}/start-server.sh -servername ${SERVER_NAME} -adminpassword ${ADMIN_PASSWORD} ${ADDITIONAL_ARGS}"
