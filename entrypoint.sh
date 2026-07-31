@@ -12,7 +12,7 @@ fi
 
 chown -R steam:steam /home/steam/
 
-su steam
+su - steam
 
 if ! test -d /home/steam/Zomboid/Server; then
     mkdir -p /home/steam/Zomboid/Server
